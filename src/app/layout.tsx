@@ -8,7 +8,13 @@ export const metadata: Metadata = {
   title: "Berlin Companion — Müller-Miller Trip",
   description:
     "AI-powered travel companion for Fiya & Chris's Berlin trip, May 19–27, 2026",
-  icons: { icon: "/favicon.ico" },
+  icons: { icon: "/favicon.ico", apple: "/icons/icon-192.png" },
+  manifest: "/manifest.json",
+  other: {
+    "mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-status-bar-style": "black-translucent",
+  },
 };
 
 export default function RootLayout({
@@ -25,6 +31,8 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
           rel="stylesheet"
         />
+        <meta name="theme-color" content="#C8102E" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
       </head>
       <body style={{ fontFamily: "'Source Sans 3', sans-serif", background: C.bg, color: C.black, minHeight: "100vh" }}>
         <Header />
@@ -66,6 +74,18 @@ export default function RootLayout({
             </span>
           </div>
         </footer>
+        {/* Service Worker registration */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                  navigator.serviceWorker.register('/sw.js').catch(() => {});
+                });
+              }
+            `,
+          }}
+        />
       </body>
     </html>
   );
