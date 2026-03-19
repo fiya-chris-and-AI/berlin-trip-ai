@@ -27,7 +27,7 @@ export default function DaySelector({ hasBadge }: DaySelectorProps) {
         const isEvent = [22, 23, 24].includes(day);
         const isFlight = [19, 27].includes(day);
         const isLove = [20, 21, 25, 26].includes(day);
-        let dotColor = C.light;
+        let dotColor: string = C.light;
         if (isEvent) dotColor = C.blue;
         if (isFlight) dotColor = C.red;
         if (isLove) dotColor = C.pink;
