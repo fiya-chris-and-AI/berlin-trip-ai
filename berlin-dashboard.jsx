@@ -36,12 +36,12 @@ const CALENDAR = {
     { t: "Evening", title: "Dinner for two", sub: "Berlin has incredible restaurants. See Berlin Info for picks.", type: "love" },
   ]},
   22: { label: "Skool Day 1", emoji: "🧠", events: [
-    { t: "Morning", title: "Early AI-dopters Meetup — Day 1", sub: "Impact Hub Berlin · Rollbergstr. 28A, 12053 Berlin", type: "event" },
+    { t: "Morning", title: "Early AI-dopters Meetup — Day 1", sub: "betahaus Berlin · Rudi-Dutschke-Str. 23, 10969 Berlin", type: "event" },
     { t: "All Day", title: "Core Day with the community", sub: "Mark Kashef, Taha El-Harti, Ty (Brazil Nut AI), + European members", type: "event" },
     { t: "Tip", title: "Brazil Nut AI hackathon winners!", sub: "You, Chris & Ty — celebrate the win with the crew", type: "tip" },
   ]},
   23: { label: "Skool Day 2", emoji: "🧠", events: [
-    { t: "Morning", title: "Early AI-dopters Meetup — Day 2", sub: "Impact Hub Berlin · Rollbergstr. 28A, 12053 Berlin", type: "event" },
+    { t: "Morning", title: "Early AI-dopters Meetup — Day 2", sub: "betahaus Berlin · Rudi-Dutschke-Str. 23, 10969 Berlin", type: "event" },
     { t: "All Day", title: "Core Day 2", sub: "N8N is also Berlin-based — possible crossover connections", type: "event" },
     { t: "Evening", title: "Community dinner / after-event hangout", sub: "Great chance to bond with the European community members", type: "event" },
   ]},
@@ -170,7 +170,7 @@ const BERLIN_INFO = [
     { l: "BVG Day Pass", d: "€8.80/day covers all U-Bahn, S-Bahn, buses, trams in zones AB" },
     { l: "Berlin WelcomeCard", d: "Transit + museum discounts — great for tourists" },
     { l: "Uber / Bolt / Freenow", d: "All work well in Berlin as backup" },
-    { l: "Impact Hub Berlin", d: "Rollbergstr. 28A, 12053 — Neukölln. U8 to Boddinstr. is closest." },
+    { l: "betahaus Berlin", d: "Rudi-Dutschke-Str. 23, 10969 — Kreuzberg. U6 to Kochstraße is closest." },
   ]},
   { cat: "Money (CASH IS KING!)", items: [
     { l: "Bring Euros in cash!", d: "Many Berlin restaurants, bars & shops are cash only. This is not a joke." },
@@ -295,7 +295,7 @@ export default function BerlinDashboard() {
             {[
               { l:"Lutfiya Miller", s:"Passenger" },
               { l:"Chris Müller", s:"Co-founder & host" },
-              { l:"Impact Hub Berlin", s:"May 22-23 event" },
+              { l:"betahaus Berlin", s:"May 22-23 event" },
               { l:"Early AI-dopters", s:"Skool community" },
               { l:"ScienceExperts.ai", s:"Your platform" },
             ].map((t,i) => (

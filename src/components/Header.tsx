@@ -78,7 +78,7 @@ export default function Header() {
             {[
               { l: "Lutfiya Miller", s: "Passenger" },
               { l: "Chris Müller", s: "Co-founder & host" },
-              { l: "Impact Hub Berlin", s: "May 22-23 event" },
+              { l: "betahaus Berlin", s: "May 22-23 event" },
               { l: "Early AI-dopters", s: "Skool community" },
               { l: "ScienceExperts.ai", s: "Your platform" },
             ].map((t, i) => (

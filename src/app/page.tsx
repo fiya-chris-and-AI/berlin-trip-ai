@@ -2,18 +2,239 @@
 
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { C } from "@/lib/colors";
 import { berlinTime, birminghamTime, daysUntilTrip, tripStatus, greeting, currentTripDay } from "@/lib/utils";
 import { CALENDAR, TRIP_DAYS } from "@/data/calendar";
 import { CHECKLIST } from "@/data/checklist";
 import { useStore } from "@/store/useStore";
 import { eventColors } from "@/lib/colors";
+import { supabase } from "@/services/supabase";
 import Card from "@/components/Card";
 import Section from "@/components/Section";
 import Link from "next/link";
 
 const TOTAL_ITEMS = CHECKLIST.reduce((sum, cat) => sum + cat.items.length, 0);
+
+/** "I am lost" SOS button — grabs GPS and sends to Chris */
+function LostButton() {
+  const [state, setState] = useState<"idle" | "locating" | "sent" | "error">("idle");
+  const [location, setLocation] = useState<{ lat: number; lng: number } | null>(null);
+  const [errorMsg, setErrorMsg] = useState("");
+  const user = useStore((s) => s.user) ?? "fiya";
+
+  const handleLost = useCallback(() => {
+    if (state === "locating") return;
+    setState("locating");
+    setErrorMsg("");
+    setLocation(null);
+
+    if (!navigator.geolocation) {
+      setState("error");
+      setErrorMsg("Geolocation is not supported by this browser.");
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+        const mapsUrl = `https://www.google.com/maps?q=${lat},${lng}`;
+        setLocation({ lat, lng });
+
+        // Send location to partner via Supabase
+        if (supabase) {
+          const sender = user === "fiya" ? "fiya" : "chris";
+          const partner = user === "fiya" ? "Chris" : "Fiya";
+          await supabase.from("messages").insert({
+            sender,
+            content: `📍 I'm lost! Here's my location: ${mapsUrl}`,
+            type: "ping",
+          });
+        }
+
+        setState("sent");
+      },
+      (err) => {
+        setState("error");
+        switch (err.code) {
+          case err.PERMISSION_DENIED:
+            setErrorMsg("Location access denied. Please enable it in your browser settings.");
+            break;
+          case err.POSITION_UNAVAILABLE:
+            setErrorMsg("Location unavailable right now. Try again.");
+            break;
+          case err.TIMEOUT:
+            setErrorMsg("Location request timed out. Try again.");
+            break;
+          default:
+            setErrorMsg("Could not get your location.");
+        }
+      },
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+    );
+  }, [state, user]);
+
+  const mapsUrl = location
+    ? `https://www.google.com/maps?q=${location.lat},${location.lng}`
+    : null;
+
+  return (
+    <div className="animate-fade-up" style={{ marginTop: 24, marginBottom: 8, textAlign: "center" }}>
+      {/* The big pink button */}
+      <button
+        onClick={handleLost}
+        disabled={state === "locating"}
+        style={{
+          width: "100%",
+          maxWidth: 400,
+          padding: "16px 24px",
+          borderRadius: 14,
+          background: state === "sent"
+            ? "linear-gradient(135deg, #DB2777 0%, #BE185D 100%)"
+            : state === "locating"
+            ? "linear-gradient(135deg, #F472B6 0%, #DB2777 100%)"
+            : "linear-gradient(135deg, #EC4899 0%, #DB2777 100%)",
+          border: "none",
+          cursor: state === "locating" ? "wait" : "pointer",
+          color: "#fff",
+          fontSize: 18,
+          fontWeight: 700,
+          letterSpacing: 0.5,
+          boxShadow: "0 4px 20px rgba(219,39,119,0.35)",
+          transition: "all 0.3s ease",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 10,
+          margin: "0 auto",
+          minHeight: 56,
+        }}
+      >
+        {state === "locating" ? (
+          <>
+            <span
+              style={{
+                display: "inline-block",
+                width: 18,
+                height: 18,
+                border: "2.5px solid rgba(255,255,255,0.3)",
+                borderTopColor: "#fff",
+                borderRadius: "50%",
+                animation: "spin 0.8s linear infinite",
+              }}
+            />
+            Finding you...
+          </>
+        ) : state === "sent" ? (
+          <>📍 Location Sent!</>
+        ) : (
+          <>🆘 I am lost.</>
+        )}
+      </button>
+
+      {/* Spinner keyframes */}
+      <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+
+      {/* Success: show Google Maps link */}
+      {state === "sent" && location && mapsUrl && (
+        <div
+          className="animate-fade-up"
+          style={{
+            marginTop: 12,
+            padding: "14px 18px",
+            background: "rgba(219,39,119,0.06)",
+            border: "1px solid rgba(219,39,119,0.15)",
+            borderRadius: 10,
+            maxWidth: 400,
+            margin: "12px auto 0",
+          }}
+        >
+          <div style={{ fontSize: 12, color: C.pink, fontWeight: 600, marginBottom: 6 }}>
+            ✅ Chris can see your location now
+          </div>
+          <a
+            href={mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 6,
+              padding: "8px 16px",
+              background: "#fff",
+              border: `1px solid ${C.pinkBorder}`,
+              borderRadius: 8,
+              color: C.pink,
+              fontSize: 13,
+              fontWeight: 600,
+              textDecoration: "none",
+              transition: "all 0.2s",
+            }}
+          >
+            📍 Open in Google Maps
+          </a>
+          <div className="font-code" style={{ fontSize: 9, color: C.light, marginTop: 8 }}>
+            {location.lat.toFixed(6)}, {location.lng.toFixed(6)}
+          </div>
+          {/* Send again */}
+          <button
+            onClick={() => { setState("idle"); setLocation(null); }}
+            style={{
+              marginTop: 8,
+              padding: "4px 12px",
+              background: "transparent",
+              border: `1px solid ${C.pinkBorder}`,
+              borderRadius: 6,
+              color: C.pink,
+              fontSize: 11,
+              cursor: "pointer",
+              minHeight: "auto",
+            }}
+          >
+            Send again
+          </button>
+        </div>
+      )}
+
+      {/* Error state */}
+      {state === "error" && (
+        <div
+          className="animate-fade-up"
+          style={{
+            marginTop: 12,
+            padding: "10px 16px",
+            background: C.redSoft,
+            border: `1px solid ${C.redBorder}`,
+            borderRadius: 8,
+            fontSize: 12,
+            color: C.red,
+            maxWidth: 400,
+            margin: "12px auto 0",
+          }}
+        >
+          ⚠️ {errorMsg}
+          <button
+            onClick={() => setState("idle")}
+            style={{
+              marginLeft: 8,
+              padding: "2px 8px",
+              background: "transparent",
+              border: `1px solid ${C.redBorder}`,
+              borderRadius: 4,
+              color: C.red,
+              fontSize: 10,
+              cursor: "pointer",
+              minHeight: "auto",
+            }}
+          >
+            Try again
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function HomePage() {
   const [now, setNow] = useState(new Date());
@@ -140,6 +361,9 @@ export default function HomePage() {
         </Card>
       </Section>
 
+      {/* 🆘 I am lost button */}
+      <LostButton />
+
       {/* Quick Actions Grid */}
       <Section title="Quick Actions" delay={0.5}>
         <div
@@ -206,3 +430,4 @@ export default function HomePage() {
     </div>
   );
 }
+

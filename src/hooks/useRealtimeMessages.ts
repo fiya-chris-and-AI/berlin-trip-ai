@@ -4,7 +4,7 @@
 
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { supabase } from "@/services/supabase";
 
 export interface SharedMessage {
@@ -18,12 +18,16 @@ export interface SharedMessage {
 export function useRealtimeMessages() {
   const [messages, setMessages] = useState<SharedMessage[]>([]);
   const [loading, setLoading] = useState(true);
-  const channelRef = useRef<ReturnType<typeof supabase.channel> | null>(null);
 
   // Fetch existing messages
   useEffect(() => {
+    if (!supabase) {
+      setLoading(false);
+      return;
+    }
+
     async function load() {
-      const { data, error } = await supabase
+      const { data, error } = await supabase!
         .from("messages")
         .select("*")
         .order("created_at", { ascending: true })
@@ -37,6 +41,8 @@ export function useRealtimeMessages() {
 
   // Subscribe to realtime inserts
   useEffect(() => {
+    if (!supabase) return;
+
     const channel = supabase
       .channel("messages-realtime")
       .on(
@@ -48,7 +54,6 @@ export function useRealtimeMessages() {
       )
       .subscribe();
 
-    channelRef.current = channel;
     return () => {
       channel.unsubscribe();
     };
@@ -57,6 +62,11 @@ export function useRealtimeMessages() {
   /** Send a new message */
   const send = useCallback(
     async (sender: "fiya" | "chris", content: string, type: SharedMessage["type"] = "text") => {
+      if (!supabase) {
+        console.warn("[Messages] Supabase not configured — message not sent");
+        return;
+      }
+
       const { error } = await supabase
         .from("messages")
         .insert({ sender, content, type });
@@ -68,3 +78,4 @@ export function useRealtimeMessages() {
 
   return { messages, loading, send };
 }
+

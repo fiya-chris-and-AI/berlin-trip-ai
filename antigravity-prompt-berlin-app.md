@@ -16,7 +16,7 @@
 
 1. **Personal**: Their first in-person union. Chris is arranging accommodations (booking the room the night before Fiya arrives so they can check in immediately at 8:55 AM). They plan to spend significant alone time together exploring the city, exploring each other, and being present.
 
-2. **Professional**: The Early AI-dopters Skool Community meetup at **Impact Hub Berlin** (Rollbergstraße 28A, 12053 Berlin) on **May 22–23** (core days), with **May 24 as "Vibes Day"** (casual community hangout, per Mark Kashef). Community members attending include Mark Kashef, Taha El-Harti, Ty (Brazil Nut AI developer), and European members.
+2. **Professional**: The Early AI-dopters Skool Community meetup at **betahaus Berlin** (Rudi-Dutschke-Straße 23, 10969 Berlin) on **May 22–23** (core days), with **May 24 as "Vibes Day"** (casual community hangout, per Mark Kashef). Community members attending include Mark Kashef, Taha El-Harti, Ty (Brazil Nut AI developer), and European members.
 
 **This app is Fiya's gift to Chris** — a demonstration of everything they've learned building AI together, applied to making their trip extraordinary. It should feel thoughtful, personal, and technically impressive.
 
@@ -97,7 +97,7 @@ CONTEXT YOU ALWAYS KNOW:
 - This is Fiya and Chris's first time meeting in person. They are romantic partners and co-founders of ScienceExperts.ai. This trip is deeply meaningful to both of them.
 - Fiya is flying from Birmingham, AL (BHM) via Atlanta and Paris, arriving Berlin BER at 8:55 AM on May 20. Confirmation: JLY3BV. Seat 21C on first leg.
 - Chris is arranging accommodations in Berlin. Room booked from night of May 19 so Fiya can check in immediately on arrival.
-- May 22-23: Early AI-dopters Skool Community meetup at Impact Hub Berlin (Rollbergstr. 28A, 12053). Core days. Their team won the last hackathon with Brazil Nut AI (team: Fiya, Chris, Ty). Other attendees: Mark Kashef, Taha El-Harti, European community members.
+- May 22-23: Early AI-dopters Skool Community meetup at betahaus Berlin (Rudi-Dutschke-Str. 23, 10969). Core days. Their team won the last hackathon with Brazil Nut AI (team: Fiya, Chris, Ty). Other attendees: Mark Kashef, Taha El-Harti, European community members.
 - May 24: "Vibes Day" — casual community hangout (per Mark Kashef).
 - May 27: Return flight BER → AMS → DTW → BHM, departing 12:10 PM.
 - Fiya is a PhD toxicologist (DABT). Chris is a German developer/entrepreneur.
@@ -109,7 +109,7 @@ YOUR PERSONALITY:
 - Celebrate their connection — be happy for them, supportive, encouraging.
 - Be practical and specific. Give actual addresses, actual transit directions, actual prices.
 - When they ask for restaurant or activity recommendations, give REAL Berlin places with real details.
-- Proactively offer helpful context: "By the way, your body clock thinks it's 3 AM right now — take it easy" or "Impact Hub is a 15 min U-Bahn ride from here."
+- Proactively offer helpful context: "By the way, your body clock thinks it's 3 AM right now — take it easy" or "betahaus is a 15 min U-Bahn ride from here."
 - When spoken to in German (Chris may), respond naturally in German.
 - Keep responses concise for voice — 2-3 sentences max unless asked for detail.
 
@@ -150,7 +150,7 @@ TOOLS YOU HAVE ACCESS TO (function calling):
 **Berlin responds (voice + text):**
 > "You've got about 3 hours left on the ATL→CDG leg. You'll land around 6:10 AM Paris time — that's midnight back in Birmingham, so your body's going to be tired. Try to sleep! When you land, Terminal E to F is a short walk. You've got a 1-hour layover, then the quick hop to Berlin. Chris is waiting."
 
-**Chris (Day 22, at Impact Hub):**
+**Chris (Day 22, at betahaus):**
 > "Berlin, was ist ein gutes Restaurant für heute Abend? Etwas Besonderes."
 
 **Berlin responds (in German + English):**
@@ -242,8 +242,8 @@ Interactive day-by-day view for May 19–27. (Preserve all data from the existin
 - May 19: ✈️ Travel Day
 - May 20: 🇩🇪 Arrival Day (arrive 8:55 AM, meet Chris, early check-in)
 - May 21: 💕 Day with Chris (first full day, explore Berlin, dinner for two)
-- May 22: 🧠 Skool Day 1 (Impact Hub Berlin, core day, community)
-- May 23: 🧠 Skool Day 2 (Impact Hub Berlin, core day 2, community dinner)
+- May 22: 🧠 Skool Day 1 (betahaus Berlin, core day, community)
+- May 23: 🧠 Skool Day 2 (betahaus Berlin, core day 2, community dinner)
 - May 24: 🎉 Vibes Day (casual hangout per Mark, ScienceExperts.ai collab)
 - May 25: 💕 Day with Chris (free day, Potsdam option, fully adjusted)
 - May 26: 🌆 Last Full Day (final explorations, last dinner, pack)
@@ -318,7 +318,7 @@ Add custom items. Reset all with confirmation. Synced via Supabase so Chris can 
 
 Accordion sections with all essential information. (Reproduce from prototype.)
 
-**Sections**: Getting Around (BVG, WelcomeCard, Uber, Impact Hub directions), Money (CASH IS KING, ATMs, tipping, cards), Useful German (Hallo, Tschüss, Die Rechnung bitte, Ich liebe dich, etc.), Emergency (112, US Embassy, Apotheke), Weather (55-72°F, long evenings).
+**Sections**: Getting Around (BVG, WelcomeCard, Uber, betahaus directions), Money (CASH IS KING, ATMs, tipping, cards), Useful German (Hallo, Tschüss, Die Rechnung bitte, Ich liebe dich, etc.), Emergency (112, US Embassy, Apotheke), Weather (55-72°F, long evenings).
 
 **Quick Reference grid**: Time diff +7h, Currency Euro, Language German, Plugs Type C/F 230V, Emergency 112, Transit BVG €8.80.
 
@@ -354,7 +354,7 @@ When GPS is available, the app continuously (every 5 min) checks location and en
 
 - **Neighborhood detection**: Map lat/lon to Berlin Bezirke (Mitte, Kreuzberg, Friedrichshain, Neukölln, Prenzlauer Berg, Charlottenburg, etc.)
 - **Proximity alerts**: "You're 2 blocks from Five Elephant — their cheesecake is legendary." (only for favorited/saved spots)
-- **Transit context**: "Impact Hub is 20 min from here — take U8 from Kottbusser Tor, change at Hermannplatz."
+- **Transit context**: "betahaus is 20 min from here — take U6 from Kochstraße."
 - **Time-aware suggestions**: Morning → coffee spots. Afternoon → walks/experiences. Evening → dinner/drinks. Late → bars/nightlife.
 - **Weather-reactive**: If raining → suggest indoor activities. If sunny → suggest outdoor spots.
 
@@ -366,7 +366,7 @@ Proactive helpful notifications (user can toggle on/off):
 
 - **Flight reminders**: "Your flight to Atlanta departs in 3 hours. Time to head to BHM airport!"
 - **Layover alerts**: "You land in Paris in 30 min. Terminal E→F is a short walk. 1 hour layover."
-- **Event reminders**: "Skool meetup starts in 1 hour at Impact Hub. U8 to Boddinstr."
+- **Event reminders**: "Skool meetup starts in 1 hour at betahaus. U6 to Kochstraße."
 - **Jet lag tips**: "Good morning! Your body thinks it's 3 AM. Get some sunlight — it'll help reset your clock."
 - **Departure prep**: "Your flight home is tomorrow at 12:10 PM. Start packing tonight!"
 - **Thinking of You pings**: When partner sends one.

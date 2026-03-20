@@ -11,7 +11,7 @@ export const BERLIN_INFO: InfoSection[] = [
       { l: "BVG Day Pass", d: "€8.80/day covers all U-Bahn, S-Bahn, buses, trams in zones AB" },
       { l: "Berlin WelcomeCard", d: "Transit + museum discounts — great for tourists" },
       { l: "Uber / Bolt / Freenow", d: "All work well in Berlin as backup" },
-      { l: "Impact Hub Berlin", d: "Rollbergstr. 28A, 12053 — Neukölln. U8 to Boddinstr. is closest." },
+      { l: "betahaus Berlin", d: "Rudi-Dutschke-Str. 23, 10969 — Kreuzberg. U6 to Kochstraße is closest." },
     ],
   },
   {

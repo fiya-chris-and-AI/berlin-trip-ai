@@ -218,7 +218,7 @@ export default function ChatPage() {
               {[
                 "What's my flight schedule?",
                 "Best dinner spots?",
-                "How do I get to Impact Hub?",
+                "How do I get to betahaus?",
                 "Translate 'thank you' to German",
               ].map((q) => (
                 <button

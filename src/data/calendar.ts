@@ -34,7 +34,7 @@ export const CALENDAR: Record<TripDay, CalendarDay> = {
   22: {
     label: "Skool Day 1", emoji: "🧠",
     events: [
-      { t: "Morning", title: "Early AI-dopters Meetup — Day 1", sub: "Impact Hub Berlin · Rollbergstr. 28A, 12053 Berlin", type: "event" },
+      { t: "Morning", title: "Early AI-dopters Meetup — Day 1", sub: "betahaus Berlin · Rudi-Dutschke-Str. 23, 10969 Berlin", type: "event" },
       { t: "All Day", title: "Core Day with the community", sub: "Mark Kashef, Taha El-Harti, Ty (Brazil Nut AI), + European members", type: "event" },
       { t: "Tip", title: "Brazil Nut AI hackathon winners!", sub: "You, Chris & Ty — celebrate the win with the crew", type: "tip" },
     ],
@@ -42,7 +42,7 @@ export const CALENDAR: Record<TripDay, CalendarDay> = {
   23: {
     label: "Skool Day 2", emoji: "🧠",
     events: [
-      { t: "Morning", title: "Early AI-dopters Meetup — Day 2", sub: "Impact Hub Berlin · Rollbergstr. 28A, 12053 Berlin", type: "event" },
+      { t: "Morning", title: "Early AI-dopters Meetup — Day 2", sub: "betahaus Berlin · Rudi-Dutschke-Str. 23, 10969 Berlin", type: "event" },
       { t: "All Day", title: "Core Day 2", sub: "N8N is also Berlin-based — possible crossover connections", type: "event" },
       { t: "Evening", title: "Community dinner / after-event hangout", sub: "Great chance to bond with the European community members", type: "event" },
     ],
